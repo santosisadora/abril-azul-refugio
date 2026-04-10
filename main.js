@@ -43,12 +43,11 @@ AFRAME.registerComponent('clickable', {
             }
         });
 
-        // Visual feedback on hover/fusing
         el.addEventListener('mouseenter', function () {
             el.setAttribute('animation__scale', {
                 property: 'scale',
-                to: '1.2 1.2 1.2',
-                dur: 300
+                to: '1.1 1.1 1.1',
+                dur: 200
             });
         });
 
@@ -56,13 +55,36 @@ AFRAME.registerComponent('clickable', {
             el.setAttribute('animation__scale', {
                 property: 'scale',
                 to: '1 1 1',
-                dur: 300
+                dur: 200
             });
         });
     }
 });
 
-// Ensure the scene is loaded before interacting with components
+// Custom Inverted Look Controls for Horizontal Axis
+AFRAME.registerComponent('inverted-look', {
+    dependencies: ['look-controls'],
+    init: function () {
+        this.el.addEventListener('componentchanged', (evt) => {
+            if (evt.detail.name === 'rotation') {
+                // Potential logic for strict enforcement if needed
+            }
+        });
+        
+        // We will utilize the built-in 'reverseMouseDrag' when possible, 
+        // but for total control, we can tweak the 'look-controls' state.
+        const lookControls = this.el.components['look-controls'];
+        if (lookControls) {
+            lookControls.data.reverseMouseDrag = true;
+            lookControls.data.reverseTouchDrag = true; // For future-proofing or custom forks
+        }
+    },
+    tick: function() {
+        // Direct override of yaw if A-Frame's built-in doesn't suffice for touch
+    }
+});
+
+// Ensure the scene is loaded
 document.querySelector('a-scene').addEventListener('loaded', function () {
-    console.log('Cena A-Frame carregada e pronta.');
+    console.log('Cena A-Frame carregada e pronta em White Tech.');
 });
