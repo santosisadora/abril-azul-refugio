@@ -58,102 +58,98 @@
         <a-sky color="#f8f1e5"></a-sky> 
         
         <!-- Floor & Walls -->
-        <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#f2e9e4" material="roughness: 0.8" shadow="receive: true"></a-plane>
-        <a-box position="0 2.5 -5" width="10" height="5" depth="0.1" color="#f2e9e4" material="roughness: 1" shadow="receive: true"></a-box> <!-- Front Wall -->
-        <a-box position="-5 2.5 0" rotation="0 90 0" width="10" height="5" depth="0.1" color="#f2e9e4" material="roughness: 1"></a-box> <!-- Left Wall -->
-        <a-box position="5 2.5 0" rotation="0 -90 0" width="10" height="5" depth="0.1" color="#c9ada7" material="roughness: 1"></a-box> <!-- Right Wall (Accent) -->
-        <a-box position="0 5 0" rotation="90 0 0" width="10" height="10" depth="0.1" color="#f2e9e4"></a-box> <!-- Ceiling -->
+        <a-plane position="0 0.01 0" rotation="-90 0 0" width="10" height="10" color="#f2e9e4" material="roughness: 0.8" shadow="receive: true"></a-plane>
+        <a-circle position="0 0.02 0" rotation="-90 0 0" radius="2.5" color="#d4a373" material="opacity: 0.3" shadow="receive: true"></a-circle> <!-- Rug -->
+
+        <!-- Wall Panels for "High-Tech" look -->
+        <a-box position="0 2.5 -4.95" width="10" height="5" depth="0.05" color="#f2e9e4" material="roughness: 1" shadow="receive: true"></a-box> <!-- Front Wall -->
+        <a-box position="0 1.5 -4.92" width="6" height="3" depth="0.02" color="#e8dfd1" material="opacity: 0.5"></a-box> <!-- Decorative Panel -->
+        
+        <a-box position="-4.95 2.5 0" rotation="0 90 0" width="10" height="5" depth="0.05" color="#f2e9e4" material="roughness: 1"></a-box> <!-- Left Wall -->
+        <a-box position="4.95 2.5 0" rotation="0 -90 0" width="10" height="5" depth="0.05" color="#c9ada7" material="roughness: 1"></a-box> <!-- Right Wall -->
 
         <!-- Window (Light Source) -->
-        <a-plane id="window" position="-4.94 2.2 0" rotation="0 90 0" width="3" height="3" color="#fff" material="shader: flat; opacity: 0.9"></a-plane>
-        <a-light type="directional" position="-5 4 0" target="#main-scene" intensity="0.8" color="#fff1e0" castShadow="true"></a-light>
-        <a-light type="ambient" color="#fff" intensity="0.5"></a-light>
-
-        <!-- Camera + Gaze Cursor -->
-        <a-entity id="rig" position="0 0 0">
-            <a-entity camera look-controls position="0 1.6 0">
-                <a-entity 
-                    id="cursor"
-                    cursor="fuse: true; fuseTimeout: 1500"
-                    position="0 0 -1"
-                    geometry="primitive: ring; radius-inner: 0.02; radius-outer: 0.03"
-                    material="color: #4a90e2; shader: flat; opacity: 0.8"
-                    raycaster="objects: .clickable"
-                    animation__fusing="property: scale; from: 1 1 1; to: 0.3 0.3 0.3; dur: 1500; startEvents: fusing"
-                    animation__mouseleave="property: scale; from: 0.3 0.3 0.3; to: 1 1 1; dur: 500; startEvents: mouseleave"
-                >
-                </a-entity>
-            </a-entity>
-        </a-entity>
+        <a-plane id="window-frame" position="-4.9 2.2 0" rotation="0 90 0" width="3.2" height="3.2" color="#333" material="roughness: 0.2"></a-plane>
+        <a-plane id="window" position="-4.88 2.2 0" rotation="0 90 0" width="3" height="3" color="#fff" material="shader: flat; opacity: 1"></a-plane>
+        <a-light type="directional" position="-5 4 0" intensity="0.9" color="#fff1e0" castShadow="true"></a-light>
 
         <!-- DESIGNATED HOTSPOTS AND OBJECTS -->
         
         <!-- 1. The Mirror (Masking) -->
-        <a-entity position="-2 0 -4.5">
-            <!-- Mirror Body -->
+        <a-entity position="-2.5 0 -4">
+            <!-- Mirror Frame -->
+            <a-box position="0 1.25 0" width="1.1" height="2.1" depth="0.1" color="#d4a373"></a-box>
             <a-box 
                 id="obj-mirror"
                 class="clickable"
-                position="0 1.2 0"
-                width="1" height="2" depth="0.05"
-                color="#f8f1e5"
-                material="roughness: 0.1; metalness: 0.8"
+                position="0 1.25 0.06"
+                width="1" height="2" depth="0.02"
+                color="#a8d8ea"
+                material="roughness: 0.1; metalness: 0.9; emissive: #a8d8ea; emissiveIntensity: 0.1"
                 data-title="O Espelho"
                 data-content="Social Masking é a camuflagem de traços autistas para se ajustar socialmente. <br><br> 🎭 <b>A Camuflagem Social:</b> Pode causar esgotamento extremo e perda de identidade."
             >
-                <a-text value="CONCEITO DE MASKING" look-at="[camera]" position="0 1.2 0" align="center" width="3" color="#4a90e2"></a-text>
+                <!-- Holographic Label -->
+                <a-entity look-at="[camera]" position="0 1.3 0.1">
+                    <a-text value="MASKING" align="center" width="4" color="#4a90e2" font="exo2bold"
+                            animation="property: opacity; from: 0.6; to: 1; dir: alternate; loop: true; dur: 2000"></a-text>
+                </a-entity>
             </a-box>
-            <!-- Hotspot Base -->
-            <a-circle rotation="-90 0 0" radius="0.3" color="#4a90e2" opacity="0.5" animation="property: scale; from: 1 1 1; to: 1.2 1.2 1.2; dir: alternate; loop: true; dur: 1000"></a-circle>
+            <a-circle rotation="-90 0 0" radius="0.35" color="#4a90e2" opacity="0.3" 
+                      animation="property: scale; from: 1 1 1; to: 1.3 1.3 1.3; dir: alternate; loop: true; dur: 1500"></a-circle>
         </a-entity>
 
         <!-- 2. The Bookshelf (Resources) -->
-        <a-entity position="4.3 0 -3" rotation="0 -30 0">
-            <a-box 
-                id="obj-bookshelf"
-                class="clickable"
-                position="0 1.5 0"
-                width="1.2" height="2" depth="0.3"
-                color="#9a8c98"
-                data-title="Estante de Livros"
-                data-content="Informação de qualidade é essencial. <br><br> 📚 <b>Recursos:</b> ABRAÇA, Livros sobre Diagnóstico Tardio e Artigos Científicos."
-            >
-                <a-text value="ESTANTE DE LIVROS" look-at="[camera]" position="0 1.3 0" align="center" width="3" color="#4a90e2"></a-text>
+        <a-entity position="4 0 -2.5" rotation="0 -45 0">
+            <a-box position="0 1.2 0" width="1.3" height="2.4" depth="0.4" color="#9a8c98">
+                <!-- Shelves -->
+                <a-box position="0 0.4 0.1" width="1.2" height="0.05" depth="0.35" color="#c9ada7"></a-box>
+                <a-box position="0 -0.4 0.1" width="1.2" height="0.05" depth="0.35" color="#c9ada7"></a-box>
             </a-box>
-            <a-circle rotation="-90 0 0" radius="0.3" color="#4a90e2" opacity="0.5"></a-circle>
+            <a-entity id="obj-bookshelf" class="clickable" position="0 1.2 0.3"
+                data-title="Estante de Livros"
+                data-content="Informação de qualidade é essencial. <br><br> 📚 <b>Recursos:</b> ABRAÇA, Livros sobre Diagnóstico Tardio e Artigos Científicos.">
+                <a-entity look-at="[camera]">
+                    <a-text value="RECURSOS" align="center" width="4" color="#4a90e2" font="exo2bold"
+                            animation="property: opacity; from: 0.6; to: 1; dir: alternate; loop: true; dur: 1800"></a-text>
+                </a-entity>
+            </a-entity>
+            <a-circle rotation="-90 0 0" radius="0.4" color="#4a90e2" opacity="0.3"></a-circle>
         </a-entity>
 
-        <!-- 3. The Headphones (Audio Demo) -->
-        <a-entity position="-4 1.5 1.5" rotation="0 90 0">
+        <!-- 3. The Headphones (Sensory) -->
+        <a-entity position="-4.5 1.8 1.5" rotation="0 90 0">
             <a-sphere 
                 id="obj-headphones"
                 class="clickable"
                 radius="0.4"
                 color="#4a4a4a"
+                material="metalness: 0.6; roughness: 0.2"
                 data-title="Fone de Ouvido"
                 data-content="🎧 <b>Sobrecarga Sensorial:</b> A hipersensibilidade auditiva faz com que sons do dia-a-dia sejam processados como ruídos intensos e exaustivos."
             >
-                <a-text value="FONE DE OUVIDO" look-at="[camera]" position="0 0.6 0" align="center" width="3" color="#4a90e2"></a-text>
+                <a-entity look-at="[camera]" position="0 0.7 0">
+                    <a-text value="CONFORTO ACÚSTICO" align="center" width="3.5" color="#4a90e2" font="exo2bold"></a-text>
+                </a-entity>
             </a-sphere>
+            <a-circle rotation="-90 0 0" position="0 -0.5 0" radius="0.3" color="#4a90e2" opacity="0.3"></a-circle>
         </a-entity>
 
-        <!-- 4. The Laptop (Assessment/Disclaimer) -->
-        <a-entity position="0 0 -2">
-            <a-box 
-                id="obj-laptop"
-                class="clickable"
-                position="0 0.8 0"
-                width="0.8" height="0.05" depth="0.6"
-                color="#222"
+        <!-- 4. The Laptop (Refined) -->
+        <a-entity position="0 0 -3">
+            <!-- High-Tech Desk -->
+            <a-box position="0 0.7 0" width="2" height="0.08" depth="0.9" color="#e8dfd1" material="roughness: 0.3"></a-box>
+            <a-box position="-0.9 0.35 0.35" width="0.1" height="0.7" depth="0.1" color="#9e8170"></a-box>
+            <a-box position="0.9 0.35 0.35" width="0.1" height="0.7" depth="0.1" color="#9e8170"></a-box>
+            
+            <a-entity id="obj-laptop" class="clickable" position="0 0.85 0"
                 data-title="Laptop (Autoavaliação)"
-                data-content="💻 <b>Triagem de Sintomas:</b> Ferramentas como RAADS-R podem te ajudar a entender sua neurodivergência. <br><br> ⚠️ <b>IMPORTANTE:</b> Este teste não substitui um diagnóstico oficial. O diagnóstico deve ser realizado por um <b>Neuropsicólogo</b> ou <b>Psiquiatra</b> especializado."
-            >
-                <a-text value="LAPTOP" look-at="[camera]" position="0 0.4 0" align="center" width="3" color="#4a90e2"></a-text>
-            </a-box>
-            <!-- Desk beneath laptop -->
-            <a-box position="0 0.7 0" width="1.5" height="0.05" depth="0.8" color="#9e8170"></a-box>
-            <a-box position="-0.7 0.35 0.35" width="0.05" height="0.7" depth="0.05" color="#9e8170"></a-box>
-            <a-box position="0.7 0.35 0.35" width="0.05" height="0.7" depth="0.05" color="#9e8170"></a-box>
+                data-content="💻 <b>Triagem de Sintomas:</b> Ferramentas como RAADS-R podem te ajudar a entender sua neurodivergência. <br><br> <div class='disclaimer'>⚠️ <b>IMPORTANTE:</b> Este teste não substitui um diagnóstico oficial. O diagnóstico deve ser realizado por um <b>Neuropsicólogo</b> ou <b>Psiquiatra</b> especializado.</div>">
+                <a-box width="0.8" height="0.05" depth="0.6" color="#222" material="roughness: 0.1; metalness: 0.5"></a-box>
+                <a-entity look-at="[camera]" position="0 0.4 0">
+                    <a-text value="AVALIAÇÃO" align="center" width="4" color="#4a90e2" font="exo2bold"></a-text>
+                </a-entity>
+            </a-entity>
         </a-entity>
 
     </a-scene>
