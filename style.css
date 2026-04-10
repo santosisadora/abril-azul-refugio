@@ -28,33 +28,47 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Let clicks pass through to A-Frame by default */
+    pointer-events: none;
     z-index: 10;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 30px;
 }
 
 header {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
     border: 1px solid var(--glass-border);
+    max-width: fit-content;
+    pointer-events: auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.logo-container i {
+    font-size: 2rem;
+    color: var(--accent-blue);
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--accent-blue);
-    letter-spacing: 1px;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
 }
 
 header p {
-    font-size: 0.9rem;
-    opacity: 0.8;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-left: 44px; /* Align with text after icon */
 }
 
 footer {
@@ -67,56 +81,65 @@ footer {
     background: var(--accent-blue);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
+    padding: 12px 24px;
+    border-radius: 50px;
     font-family: inherit;
     font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .btn-audio:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
     background: #357abd;
 }
 
-/* Modal System */
+.btn-audio i {
+    font-size: 1.2rem;
+}
+
+/* Modal System - Matterport Style */
 .modal {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 400px;
-    background: var(--modal-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    pointer-events: auto; /* Capture clicks on the modal */
+    max-width: 450px;
+    pointer-events: auto;
     z-index: 100;
-    transition: opacity 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .modal.hidden {
     opacity: 0;
     visibility: hidden;
+    transform: translate(-50%, -40%);
 }
 
-.modal-content {
-    position: relative;
+.modal-content.glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
 .close-button {
     position: absolute;
-    top: -15px;
-    right: -10px;
-    font-size: 1.8rem;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
     cursor: pointer;
     color: var(--text-dark);
-    opacity: 0.5;
+    opacity: 0.6;
+    transition: opacity 0.2s;
 }
 
 .close-button:hover {
@@ -124,19 +147,51 @@ footer {
 }
 
 #modal-body h2 {
-    margin-bottom: 15px;
-    color: var(--accent-blue);
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-blue);
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 #modal-body p {
-    line-height: 1.6;
-    font-size: 1rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #444;
 }
 
-#modal-body a {
+#modal-body b {
     color: var(--accent-blue);
+}
+
+/* Neuro-Disclaimer Style */
+#modal-body .disclaimer {
+    background: rgba(74, 144, 226, 0.1);
+    border-left: 4px solid var(--accent-blue);
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-read-more {
+    display: block;
+    width: 100%;
+    background: var(--accent-blue);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
     font-weight: 600;
-    text-decoration: underline;
+    margin-top: 25px;
+    transition: background 0.3s;
+}
+
+.btn-read-more:hover {
+    background: #357abd;
 }
 
 /* A-Frame specific UI tweak */

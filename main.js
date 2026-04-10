@@ -21,13 +21,12 @@ let isAudioPlaying = false;
 
 btnAudio.addEventListener('click', () => {
     if (!isAudioPlaying) {
-        // A-Frame sound component logic
         ambientSound.components.sound.playSound();
-        btnAudio.textContent = '🔊 Pausar Áudio Ambiente';
+        btnAudio.innerHTML = '<i class="ph-bold ph-speaker-high"></i> Áudio Ativo';
         isAudioPlaying = true;
     } else {
         ambientSound.components.sound.pauseSound();
-        btnAudio.textContent = '🔇 Iniciar Áudio Ambiente';
+        btnAudio.innerHTML = '<i class="ph-bold ph-speaker-slash"></i> Áudio Ambiente';
         isAudioPlaying = false;
     }
 });
